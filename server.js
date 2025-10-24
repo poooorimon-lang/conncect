@@ -1,7 +1,9 @@
 // Import Express
 const express = require('express');
 const app = express();
-const PORT = 3000;
+
+// Use Render's assigned port or default to 3000 locally
+const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -25,7 +27,12 @@ app.post('/check', (req, res) => {
   }
 });
 
+// Basic GET route for Render health checks
+app.get('/', (req, res) => {
+  res.send('✅ Server is running successfully!');
+});
+
 // Start the server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
